@@ -33,6 +33,7 @@ function useTableCore({
     onPaginationChange,
     onGlobalFilterChange,
     enableSorting,
+    enableSortingRemoval: false,
     enableGlobalFilter: enableSearching,
     getCoreRowModel: getCoreRowModel(),
     ...enableSorting && {

@@ -62,6 +62,9 @@ export function useTableCore<TData extends object>({
     onGlobalFilterChange,
 
     enableSorting,
+
+    enableSortingRemoval: false,
+
     enableGlobalFilter: enableSearching,
 
     getCoreRowModel: getCoreRowModel(),

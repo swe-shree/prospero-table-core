@@ -54,6 +54,7 @@ function useTableCore({
     onPaginationChange,
     onGlobalFilterChange,
     enableSorting,
+    enableSortingRemoval: false,
     enableGlobalFilter: enableSearching,
     getCoreRowModel: (0, import_react_table.getCoreRowModel)(),
     ...enableSorting && {
