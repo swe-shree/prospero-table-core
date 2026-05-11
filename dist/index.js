@@ -38,6 +38,9 @@ function useTableCore({
   onPaginationChange,
   globalFilter = "",
   onGlobalFilterChange,
+  rowSelection = {},
+  onRowSelectionChange,
+  enableRowSelection = false,
   enableSorting = true,
   enablePagination = true,
   enableSearching = true
@@ -48,12 +51,15 @@ function useTableCore({
     state: {
       sorting,
       pagination,
-      globalFilter
+      globalFilter,
+      rowSelection
     },
     onSortingChange,
     onPaginationChange,
     onGlobalFilterChange,
+    onRowSelectionChange,
     enableSorting,
+    enableRowSelection,
     enableSortingRemoval: false,
     enableGlobalFilter: enableSearching,
     getCoreRowModel: (0, import_react_table.getCoreRowModel)(),

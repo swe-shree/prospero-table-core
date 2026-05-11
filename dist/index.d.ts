@@ -1,5 +1,5 @@
 import * as _tanstack_react_table from '@tanstack/react-table';
-import { ColumnDef, SortingState, OnChangeFn, PaginationState } from '@tanstack/react-table';
+import { ColumnDef, SortingState, OnChangeFn, PaginationState, RowSelectionState } from '@tanstack/react-table';
 
 type UseTableCoreProps<TData extends object> = {
     data: TData[];
@@ -10,10 +10,13 @@ type UseTableCoreProps<TData extends object> = {
     onPaginationChange?: OnChangeFn<PaginationState>;
     globalFilter?: string;
     onGlobalFilterChange?: OnChangeFn<string>;
+    rowSelection?: RowSelectionState;
+    onRowSelectionChange?: OnChangeFn<RowSelectionState>;
+    enableRowSelection?: boolean;
     enableSorting?: boolean;
     enablePagination?: boolean;
     enableSearching?: boolean;
 };
-declare function useTableCore<TData extends object>({ data, columns, sorting, onSortingChange, pagination, onPaginationChange, globalFilter, onGlobalFilterChange, enableSorting, enablePagination, enableSearching, }: UseTableCoreProps<TData>): _tanstack_react_table.Table<TData>;
+declare function useTableCore<TData extends object>({ data, columns, sorting, onSortingChange, pagination, onPaginationChange, globalFilter, onGlobalFilterChange, rowSelection, onRowSelectionChange, enableRowSelection, enableSorting, enablePagination, enableSearching, }: UseTableCoreProps<TData>): _tanstack_react_table.Table<TData>;
 
 export { type UseTableCoreProps, useTableCore };
