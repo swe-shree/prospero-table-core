@@ -19,7 +19,7 @@ function useTableCore({
   onGlobalFilterChange,
   rowSelection = {},
   onRowSelectionChange,
-  enableRowSelection = false,
+  enableRowSelection = true,
   enableSorting = true,
   enablePagination = true,
   enableSearching = true

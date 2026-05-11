@@ -6,6 +6,7 @@ import {
   type ColumnDef,
   type SortingState,
   type PaginationState,
+  type RowSelectionState,
   type OnChangeFn,
 } from "@tanstack/react-table";
 
@@ -22,7 +23,9 @@ export type UseTableCoreProps<TData extends object> = {
   globalFilter?: string;
   onGlobalFilterChange?: OnChangeFn<string>;
 
-    
+  rowSelection?: RowSelectionState;
+  onRowSelectionChange?: OnChangeFn<RowSelectionState>;
+  enableRowSelection?: boolean;
 
   enableSorting?: boolean;
   enablePagination?: boolean;
@@ -45,7 +48,9 @@ export function useTableCore<TData extends object>({
   globalFilter = "",
   onGlobalFilterChange,
 
-
+  rowSelection = {},
+  onRowSelectionChange,
+  enableRowSelection = true,
 
   enableSorting = true,
   enablePagination = true,
@@ -59,18 +64,17 @@ export function useTableCore<TData extends object>({
       sorting,
       pagination,
       globalFilter,
-      
+      rowSelection,
     },
 
     onSortingChange,
     onPaginationChange,
     onGlobalFilterChange,
-   
+    onRowSelectionChange,
+
     enableSorting,
-      
-
+    enableRowSelection,
     enableSortingRemoval: false,
-
     enableGlobalFilter: enableSearching,
 
     getCoreRowModel: getCoreRowModel(),
