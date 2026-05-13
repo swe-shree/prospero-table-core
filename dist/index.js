@@ -39,10 +39,7 @@ function useTableCore({
   rowSelection = {},
   onRowSelectionChange,
   enableSorting = true,
-  enablePagination = true,
-  enableRowSelection = false,
-  manualPagination = false,
-  pageCount
+  enableRowSelection = true
 }) {
   return (0, import_react_table.useReactTable)({
     data,
@@ -57,15 +54,10 @@ function useTableCore({
     onRowSelectionChange,
     enableSorting,
     enableRowSelection,
-    manualPagination,
-    pageCount,
     autoResetPageIndex: false,
     getCoreRowModel: (0, import_react_table.getCoreRowModel)(),
     ...enableSorting && {
       getSortedRowModel: (0, import_react_table.getSortedRowModel)()
-    },
-    ...enablePagination && !manualPagination && {
-      getPaginationRowModel: (0, import_react_table.getPaginationRowModel)()
     }
   });
 }

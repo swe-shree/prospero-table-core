@@ -11,11 +11,8 @@ type UseTableCoreProps<TData extends object> = {
     rowSelection?: RowSelectionState;
     onRowSelectionChange?: OnChangeFn<RowSelectionState>;
     enableSorting?: boolean;
-    enablePagination?: boolean;
     enableRowSelection?: boolean;
-    manualPagination?: boolean;
-    pageCount?: number;
 };
-declare function useTableCore<TData extends object>({ data, columns, sorting, onSortingChange, pagination, onPaginationChange, rowSelection, onRowSelectionChange, enableSorting, enablePagination, enableRowSelection, manualPagination, pageCount, }: UseTableCoreProps<TData>): _tanstack_react_table.Table<TData>;
+declare function useTableCore<TData extends object>({ data, columns, sorting, onSortingChange, pagination, onPaginationChange, rowSelection, onRowSelectionChange, enableSorting, enableRowSelection, }: UseTableCoreProps<TData>): _tanstack_react_table.Table<TData>;
 
 export { type UseTableCoreProps, useTableCore };
