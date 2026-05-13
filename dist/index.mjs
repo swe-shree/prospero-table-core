@@ -22,7 +22,9 @@ function useTableCore({
   enableRowSelection = true,
   enableSorting = true,
   enablePagination = true,
-  enableSearching = true
+  enableSearching = true,
+  manualPagination = false,
+  pageCount
 }) {
   return useReactTable({
     data,
@@ -41,11 +43,13 @@ function useTableCore({
     enableRowSelection,
     enableSortingRemoval: false,
     enableGlobalFilter: enableSearching,
+    manualPagination,
+    pageCount,
     getCoreRowModel: getCoreRowModel(),
     ...enableSorting && {
       getSortedRowModel: getSortedRowModel()
     },
-    ...enablePagination && {
+    ...!manualPagination && enablePagination && {
       getPaginationRowModel: getPaginationRowModel()
     }
   });
