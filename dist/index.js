@@ -36,14 +36,11 @@ function useTableCore({
     pageSize: 10
   },
   onPaginationChange,
-  globalFilter = "",
-  onGlobalFilterChange,
   rowSelection = {},
   onRowSelectionChange,
-  enableRowSelection = true,
   enableSorting = true,
   enablePagination = true,
-  enableSearching = true,
+  enableRowSelection = false,
   manualPagination = false,
   pageCount
 }) {
@@ -53,24 +50,21 @@ function useTableCore({
     state: {
       sorting,
       pagination,
-      globalFilter,
       rowSelection
     },
     onSortingChange,
     onPaginationChange,
-    onGlobalFilterChange,
     onRowSelectionChange,
     enableSorting,
     enableRowSelection,
-    enableSortingRemoval: false,
-    enableGlobalFilter: enableSearching,
     manualPagination,
     pageCount,
+    autoResetPageIndex: false,
     getCoreRowModel: (0, import_react_table.getCoreRowModel)(),
     ...enableSorting && {
       getSortedRowModel: (0, import_react_table.getSortedRowModel)()
     },
-    ...!manualPagination && enablePagination && {
+    ...enablePagination && !manualPagination && {
       getPaginationRowModel: (0, import_react_table.getPaginationRowModel)()
     }
   });

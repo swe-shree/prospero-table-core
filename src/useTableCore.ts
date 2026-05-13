@@ -1,12 +1,12 @@
 import {
   useReactTable,
   getCoreRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
+  getPaginationRowModel,
   type ColumnDef,
-  type SortingState,
   type PaginationState,
   type RowSelectionState,
+  type SortingState,
   type OnChangeFn,
 } from "@tanstack/react-table";
 
@@ -20,16 +20,12 @@ export type UseTableCoreProps<TData extends object> = {
   pagination?: PaginationState;
   onPaginationChange?: OnChangeFn<PaginationState>;
 
-  globalFilter?: string;
-  onGlobalFilterChange?: OnChangeFn<string>;
-
   rowSelection?: RowSelectionState;
   onRowSelectionChange?: OnChangeFn<RowSelectionState>;
-  enableRowSelection?: boolean;
 
   enableSorting?: boolean;
   enablePagination?: boolean;
-  enableSearching?: boolean;
+  enableRowSelection?: boolean;
 
   manualPagination?: boolean;
   pageCount?: number;
@@ -48,16 +44,12 @@ export function useTableCore<TData extends object>({
   },
   onPaginationChange,
 
-  globalFilter = "",
-  onGlobalFilterChange,
-
   rowSelection = {},
   onRowSelectionChange,
-  enableRowSelection = true,
 
   enableSorting = true,
   enablePagination = true,
-  enableSearching = true,
+  enableRowSelection = false,
 
   manualPagination = false,
   pageCount,
@@ -69,22 +61,20 @@ export function useTableCore<TData extends object>({
     state: {
       sorting,
       pagination,
-      globalFilter,
       rowSelection,
     },
 
     onSortingChange,
     onPaginationChange,
-    onGlobalFilterChange,
     onRowSelectionChange,
 
     enableSorting,
     enableRowSelection,
-    enableSortingRemoval: false,
-    enableGlobalFilter: enableSearching,
 
     manualPagination,
     pageCount,
+
+    autoResetPageIndex: false,
 
     getCoreRowModel: getCoreRowModel(),
 
@@ -92,8 +82,8 @@ export function useTableCore<TData extends object>({
       getSortedRowModel: getSortedRowModel(),
     }),
 
-    ...(!manualPagination &&
-      enablePagination && {
+    ...(enablePagination &&
+      !manualPagination && {
         getPaginationRowModel: getPaginationRowModel(),
       }),
   });
