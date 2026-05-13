@@ -30,6 +30,9 @@ export type UseTableCoreProps<TData extends object> = {
   enableSorting?: boolean;
   enablePagination?: boolean;
   enableSearching?: boolean;
+
+  manualPagination?: boolean;
+  pageCount?: number;
 };
 
 export function useTableCore<TData extends object>({
@@ -55,6 +58,9 @@ export function useTableCore<TData extends object>({
   enableSorting = true,
   enablePagination = true,
   enableSearching = true,
+
+  manualPagination = false,
+  pageCount,
 }: UseTableCoreProps<TData>) {
   return useReactTable({
     data,
@@ -77,14 +83,18 @@ export function useTableCore<TData extends object>({
     enableSortingRemoval: false,
     enableGlobalFilter: enableSearching,
 
+    manualPagination,
+    pageCount,
+
     getCoreRowModel: getCoreRowModel(),
 
     ...(enableSorting && {
       getSortedRowModel: getSortedRowModel(),
     }),
 
-    ...(enablePagination && {
-      getPaginationRowModel: getPaginationRowModel(),
-    }),
+    ...(!manualPagination &&
+      enablePagination && {
+        getPaginationRowModel: getPaginationRowModel(),
+      }),
   });
 }
