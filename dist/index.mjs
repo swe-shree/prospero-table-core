@@ -2,6 +2,7 @@
 import {
   useReactTable,
   getCoreRowModel,
+  getPaginationRowModel,
   getSortedRowModel
 } from "@tanstack/react-table";
 function useTableCore({
@@ -17,7 +18,10 @@ function useTableCore({
   rowSelection = {},
   onRowSelectionChange,
   enableSorting = true,
-  enableRowSelection = true
+  enableRowSelection = true,
+  enablePagination = true,
+  manualPagination = false,
+  pageCount
 }) {
   return useReactTable({
     data,
@@ -32,11 +36,11 @@ function useTableCore({
     onRowSelectionChange,
     enableSorting,
     enableRowSelection,
-    autoResetPageIndex: false,
+    manualPagination,
+    pageCount,
     getCoreRowModel: getCoreRowModel(),
-    ...enableSorting && {
-      getSortedRowModel: getSortedRowModel()
-    }
+    getSortedRowModel: enableSorting ? getSortedRowModel() : void 0,
+    getPaginationRowModel: enablePagination && !manualPagination ? getPaginationRowModel() : void 0
   });
 }
 export {

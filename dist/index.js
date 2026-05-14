@@ -39,7 +39,10 @@ function useTableCore({
   rowSelection = {},
   onRowSelectionChange,
   enableSorting = true,
-  enableRowSelection = true
+  enableRowSelection = true,
+  enablePagination = true,
+  manualPagination = false,
+  pageCount
 }) {
   return (0, import_react_table.useReactTable)({
     data,
@@ -54,11 +57,11 @@ function useTableCore({
     onRowSelectionChange,
     enableSorting,
     enableRowSelection,
-    autoResetPageIndex: false,
+    manualPagination,
+    pageCount,
     getCoreRowModel: (0, import_react_table.getCoreRowModel)(),
-    ...enableSorting && {
-      getSortedRowModel: (0, import_react_table.getSortedRowModel)()
-    }
+    getSortedRowModel: enableSorting ? (0, import_react_table.getSortedRowModel)() : void 0,
+    getPaginationRowModel: enablePagination && !manualPagination ? (0, import_react_table.getPaginationRowModel)() : void 0
   });
 }
 // Annotate the CommonJS export names for ESM import in node:

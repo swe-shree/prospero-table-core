@@ -1,11 +1,12 @@
 import {
   useReactTable,
   getCoreRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   type ColumnDef,
+  type SortingState,
   type PaginationState,
   type RowSelectionState,
-  type SortingState,
   type OnChangeFn,
 } from "@tanstack/react-table";
 
@@ -24,6 +25,10 @@ export type UseTableCoreProps<TData extends object> = {
 
   enableSorting?: boolean;
   enableRowSelection?: boolean;
+  enablePagination?: boolean;
+
+  manualPagination?: boolean;
+  pageCount?: number;
 };
 
 export function useTableCore<TData extends object>({
@@ -44,6 +49,10 @@ export function useTableCore<TData extends object>({
 
   enableSorting = true,
   enableRowSelection = true,
+  enablePagination = true,
+
+  manualPagination = false,
+  pageCount,
 }: UseTableCoreProps<TData>) {
   return useReactTable({
     data,
@@ -62,12 +71,15 @@ export function useTableCore<TData extends object>({
     enableSorting,
     enableRowSelection,
 
-    autoResetPageIndex: false,
+    manualPagination,
+    pageCount,
 
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: enableSorting ? getSortedRowModel() : undefined,
 
-    ...(enableSorting && {
-      getSortedRowModel: getSortedRowModel(),
-    }),
+    getPaginationRowModel:
+      enablePagination && !manualPagination
+        ? getPaginationRowModel()
+        : undefined,
   });
 }
